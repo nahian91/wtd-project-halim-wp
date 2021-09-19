@@ -360,7 +360,14 @@ a.box-btn:hover i.fa {
 #navbarNav a {
 	font-weight: 500;
 	padding: 0px 12px;
-	color: #fff
+	color: #fff;
+	transition: .3s;
+}
+#navbarNav a:hover {
+	color: #635CDB !important;
+}
+.navbar-nav .current-menu-item a {
+	color: #635CDB !important;
 }
 .header {
 	padding: 10px 0;
