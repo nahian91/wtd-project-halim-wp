@@ -12,17 +12,32 @@
 				<div class="row">
 					<div class="col-md-6 col-sm-12">
 						<div class="header-left">
-							<a href=""><i class="fa fa-envelope"></i> info@halim.com</a>
-							<a href=""><i class="fa fa-phone"></i> 23457689</a>
+                     <?php
+                        $email = get_field('email', 'option');
+                        $phone = get_field('phone', 'option');
+                        if($email) {
+                     ?>
+                        <a href="mailto:<?php echo $email;?>"><i class="fa fa-envelope"></i> <?php echo $email;?></a>
+                     <?php
+                        }
+                        if($phone){
+                     ?>
+                        <a href="tel:<?php echo $phone;?>"><i class="fa fa-phone"></i> <?php echo $phone;?></a>
+                     <?php
+                        }
+                     ?>
 						</div>
 					</div>
 					<div class="col-md-6 col-sm-12 text-right">
 						<div class="header-social">
-							<a href=""><i class="fa fa-facebook"></i></a>
-							<a href=""><i class="fa fa-twitter"></i></a>
-							<a href=""><i class="fa fa-youtube"></i></a>
-							<a href=""><i class="fa fa-linkedin"></i></a>
-							<a href=""><i class="fa fa-google-plus"></i></a>
+                     <?php
+                        $socials = get_field('header_social', 'option');
+                        foreach($socials as $social) {
+                     ?>
+                        <a href="<?php echo $social['link'];?>"><i class="fa <?php echo $social['icon'];?>"></i></a>
+                     <?php
+                        }
+                     ?>
 						</div>
 					</div>
 				</div>

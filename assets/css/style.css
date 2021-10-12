@@ -1374,7 +1374,11 @@ a.box-btn:hover i.fa {
 .single-blog img {
 	width: 100%;
 }
-
+.post-img {
+	height: 250px;
+	background-size: cover;
+	background-position: center;
+}
 .google-map iframe {
 	width: 100%;
 	height: 295px;

@@ -3,7 +3,7 @@
 function halim_setup() {
 
     add_theme_support('title-tag');
-    add_theme_support('post-thumbnails', array('post', 'sliders', 'teams'));
+    add_theme_support('post-thumbnails', array('post', 'sliders', 'teams', 'testimonials'));
     load_theme_textdomain('halim', get_template_directory() . '/languages');
 
     register_nav_menus(array(
@@ -87,5 +87,69 @@ function halim_custom_posts() {
         'supports' => array('title', 'thumbnail', 'custom-fields'),
     ));
 
+    // Testimonials Custom Post
+    register_post_type('testimonials', array(
+        'labels' => array(
+            'name' => __('Testimonials', 'halim'),
+            'singular_name' => __('Testimonial', 'halim')
+        ),
+        'public' => true,
+        'show_ui' => true,
+        'supports' => array('title', 'thumbnail', 'custom-fields'),
+    ));
+
 }
 add_action('init', 'halim_custom_posts');
+
+function acf_css() {
+    ?>
+        <style>
+            .header-top{
+                background-color: <?php the_field('header_background', 'option');?>
+            }
+        </style>
+    <?php
+}
+add_action('wp_head', 'acf_css');
+
+if( function_exists('acf_add_options_page') ) {
+	
+	acf_add_options_page(array(
+		'page_title' 	=> 'Halim Options', 'halim',
+		'menu_title'	=> 'Halim Options', 'halim',
+		'menu_slug' 	=> 'halim-options',
+		'capability'	=> 'edit_posts',
+		'redirect'		=> false
+	));
+	
+	acf_add_options_sub_page(array(
+		'page_title' 	=> 'Halim Header Settings', 'halim',
+		'menu_title'	=> 'Header', 'halim',
+		'parent_slug'	=> 'halim-options',
+	));
+	
+	acf_add_options_sub_page(array(
+		'page_title' 	=> 'Halim About Settings', 'halim',
+		'menu_title'	=> 'About', 'halim',
+		'parent_slug'	=> 'halim-options',
+	));
+	
+	acf_add_options_sub_page(array(
+		'page_title' 	=> 'Halim FAQ & Skills Settings', 'halim',
+		'menu_title'	=> 'FAQ & Skills', 'halim',
+		'parent_slug'	=> 'halim-options',
+	));
+
+    acf_add_options_sub_page(array(
+		'page_title' 	=> 'Halim CTA Settings', 'halim',
+		'menu_title'	=> 'CTA', 'halim',
+		'parent_slug'	=> 'halim-options',
+	));
+
+    acf_add_options_sub_page(array(
+		'page_title' 	=> 'Halim Footer Settings', 'halim',
+		'menu_title'	=> 'Footer', 'halim',
+		'parent_slug'	=> 'halim-options',
+	));
+	
+}
