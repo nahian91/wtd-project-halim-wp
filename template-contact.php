@@ -5,21 +5,7 @@
 */
 
 get_header();?>
-<section class="breadcumb-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="breadcumb">
-                    <h4>Contact Us</h4>
-                    <ul>
-                        <li><a href=""></a>Home</li> / 
-                        <li>Contact Us</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<?php get_template_part('inc/breadcumb'); ?>
 
 <!-- Contact Us Area End -->
 <section class="contact-area pb-100 pt-100" id="contact">

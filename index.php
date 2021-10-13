@@ -4,10 +4,10 @@
         <div class="row">
             <div class="col-xl-12">
                 <div class="breadcumb">
-                    <h4>Blog</h4>
+                    <h4><?php the_title();?></h4>
                     <ul>
-                        <li><a href=""></a>Home</li> / 
-                        <li>Blog</li>
+                        <li><a href="<?php echo site_url();?>"></a>Home</li> / 
+                        <li><?php the_title();?></li>
                     </ul>
                 </div>
             </div>
@@ -18,167 +18,36 @@
 <section class="blog-area pb-100 pt-100" id="blog">
          <div class="container">
             <div class="row">
-               <div class="col-md-4">
-                  <div class="single-blog">
-                     <img src="<?php echo get_template_directory_uri();?>/assets/img/blog/blog1.jpg" alt="" />
-                     <div class="post-content">
-                        <div class="post-title">
-                           <h4><a href="#">blog title</a></h4>
+               <?php
+                  while(have_posts()){
+                     the_post();
+                  ?>
+                     <div class="col-md-4">
+                        <div class="single-blog">
+                           <div class="post-img" style="background-image:url('<?php the_post_thumbnail_url();?>')"></div>
+                           <div class="post-content">
+                              <div class="post-title">
+                                 <h4><a href="<?php the_permalink();?>"><?php the_title();?></a></h4>
+                              </div>
+                              <div class="pots-meta">
+                                 <ul>
+                                    <li><a href="#"><?php the_date();?></a></li>
+                                    <li><a href="#"><?php the_category();?></a></li>
+                                    <li><a href="#"><?php the_author();?></a></li>
+                                 </ul>
+                              </div>
+                              <?php the_excerpt();?>
+                              <a href="<?php the_permalink();?>" class="box-btn">read more <i class="fa fa-angle-double-right"></i></a>
+                           </div>
                         </div>
-                        <div class="pots-meta">
-                           <ul>
-                              <li><a href="#">25 oct 2018</a></li>
-                              <li><a href="#">admin</a></li>
-                           </ul>
-                        </div>
-                        <p>Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis.</p>
-                        <a href="blog-single.html" class="box-btn">read more <i class="fa fa-angle-double-right"></i></a>
                      </div>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="single-blog">
-                     <img src="<?php echo get_template_directory_uri();?>/assets/img/blog/blog2.jpg" alt="" />
-                     <div class="post-content">
-                        <div class="post-title">
-                           <h4><a href="#">blog title</a></h4>
-                        </div>
-                        <div class="pots-meta">
-                           <ul>
-                              <li><a href="#">25 oct 2018</a></li>
-                              <li><a href="#">admin</a></li>
-                           </ul>
-                        </div>
-                        <p>Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis.</p>
-                        <a href="blog-single.html" class="box-btn">read more <i class="fa fa-angle-double-right"></i></a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="single-blog">
-                     <img src="<?php echo get_template_directory_uri();?>/assets/img/blog/blog3.jpg" alt="" />
-                     <div class="post-content">
-                        <div class="post-title">
-                           <h4><a href="#">blog title</a></h4>
-                        </div>
-                        <div class="pots-meta">
-                           <ul>
-                              <li><a href="#">25 oct 2018</a></li>
-                              <li><a href="#">admin</a></li>
-                           </ul>
-                        </div>
-                        <p>Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis.</p>
-                        <a href="blog-single.html" class="box-btn">read more <i class="fa fa-angle-double-right"></i></a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="single-blog">
-                     <img src="<?php echo get_template_directory_uri();?>/assets/img/blog/blog3.jpg" alt="" />
-                     <div class="post-content">
-                        <div class="post-title">
-                           <h4><a href="#">blog title</a></h4>
-                        </div>
-                        <div class="pots-meta">
-                           <ul>
-                              <li><a href="#">25 oct 2018</a></li>
-                              <li><a href="#">admin</a></li>
-                           </ul>
-                        </div>
-                        <p>Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis.</p>
-                        <a href="blog-single.html" class="box-btn">read more <i class="fa fa-angle-double-right"></i></a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="single-blog">
-                     <img src="<?php echo get_template_directory_uri();?>/assets/img/blog/blog3.jpg" alt="" />
-                     <div class="post-content">
-                        <div class="post-title">
-                           <h4><a href="#">blog title</a></h4>
-                        </div>
-                        <div class="pots-meta">
-                           <ul>
-                              <li><a href="#">25 oct 2018</a></li>
-                              <li><a href="#">admin</a></li>
-                           </ul>
-                        </div>
-                        <p>Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis.</p>
-                        <a href="blog-single.html" class="box-btn">read more <i class="fa fa-angle-double-right"></i></a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="single-blog">
-                     <img src="<?php echo get_template_directory_uri();?>/assets/img/blog/blog3.jpg" alt="" />
-                     <div class="post-content">
-                        <div class="post-title">
-                           <h4><a href="#">blog title</a></h4>
-                        </div>
-                        <div class="pots-meta">
-                           <ul>
-                              <li><a href="#">25 oct 2018</a></li>
-                              <li><a href="#">admin</a></li>
-                           </ul>
-                        </div>
-                        <p>Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis.</p>
-                        <a href="blog-single.html" class="box-btn">read more <i class="fa fa-angle-double-right"></i></a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="single-blog">
-                     <img src="<?php echo get_template_directory_uri();?>/assets/img/blog/blog3.jpg" alt="" />
-                     <div class="post-content">
-                        <div class="post-title">
-                           <h4><a href="#">blog title</a></h4>
-                        </div>
-                        <div class="pots-meta">
-                           <ul>
-                              <li><a href="#">25 oct 2018</a></li>
-                              <li><a href="#">admin</a></li>
-                           </ul>
-                        </div>
-                        <p>Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis.</p>
-                        <a href="blog-single.html" class="box-btn">read more <i class="fa fa-angle-double-right"></i></a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="single-blog">
-                     <img src="<?php echo get_template_directory_uri();?>/assets/img/blog/blog3.jpg" alt="" />
-                     <div class="post-content">
-                        <div class="post-title">
-                           <h4><a href="#">blog title</a></h4>
-                        </div>
-                        <div class="pots-meta">
-                           <ul>
-                              <li><a href="#">25 oct 2018</a></li>
-                              <li><a href="#">admin</a></li>
-                           </ul>
-                        </div>
-                        <p>Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis.</p>
-                        <a href="blog-single.html" class="box-btn">read more <i class="fa fa-angle-double-right"></i></a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="single-blog">
-                     <img src="<?php echo get_template_directory_uri();?>/assets/img/blog/blog3.jpg" alt="" />
-                     <div class="post-content">
-                        <div class="post-title">
-                           <h4><a href="#">blog title</a></h4>
-                        </div>
-                        <div class="pots-meta">
-                           <ul>
-                              <li><a href="#">25 oct 2018</a></li>
-                              <li><a href="#">admin</a></li>
-                           </ul>
-                        </div>
-                        <p>Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis.</p>
-                        <a href="blog-single.html" class="box-btn">read more <i class="fa fa-angle-double-right"></i></a>
-                     </div>
-                  </div>
+                  <?php
+                  }
+               ?>
+            </div>
+            <div class="row">
+               <div class="col-md-12 text-center mt-5">
+                  <a href="blog-single.html" class="box-btn">load more <i class="fa fa-angle-double-right"></i></a>
                </div>
             </div>
          </div>

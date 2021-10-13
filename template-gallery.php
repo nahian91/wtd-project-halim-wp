@@ -5,115 +5,34 @@
 */
 
 get_header();?>
-<section class="breadcumb-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="breadcumb">
-                    <h4>Gallery</h4>
-                    <ul>
-                        <li><a href=""></a>Home</li> / 
-                        <li>Gallery</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<?php get_template_part('inc/breadcumb'); ?>
 
 <section class="gallery-area pt-100 pb-100">
     <div class="container">
         <div class="row">
-            <div class="col-xl-4">
-                <div class="single-gallery">
-                     <img src="<?php echo get_template_directory_uri();?>/assets/img/projects/01.jpg" alt="">
-                     <div class="gallery-hover">
-                        <div class="gallery-content">
-                           <h3><a href="<?php echo get_template_directory_uri();?>/assets/img/projects/01.jpg" class="gallery"><i class="fa fa-plus"></i> item name</a></h3>
+            <?php
+                $args = array(
+                    'post_type' => 'gallery',
+                    'posts_per_page' => 9
+                );
+                $query = new WP_Query($args);
+                while($query->have_posts()) {
+                    $query->the_post();
+                ?>
+                    <div class="col-xl-4">
+                        <div class="single-gallery">
+                            <img src="<?php echo the_post_thumbnail_url();?>" alt="<?php the_title();?>">
+                            <div class="gallery-hover">
+                                <div class="gallery-content">
+                                <h3><a href="<?php the_field('big_image') ?>" class="gallery"><i class="fa fa-plus"></i> <?php the_title();?></a></h3>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-xl-4">
-                <div class="single-gallery">
-                     <img src="<?php echo get_template_directory_uri();?>/assets/img/projects/02.jpg" alt="">
-                     <div class="gallery-hover">
-                        <div class="gallery-content">
-                           <h3><a href="<?php echo get_template_directory_uri();?>/assets/img/projects/02.jpg" class="gallery"><i class="fa fa-plus"></i> item name</a></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4">
-                <div class="single-gallery">
-                     <img src="<?php echo get_template_directory_uri();?>/assets/img/projects/03.jpg" alt="">
-                     <div class="gallery-hover">
-                        <div class="gallery-content">
-                           <h3><a href="<?php echo get_template_directory_uri();?>/assets/img/projects/03.jpg" class="gallery"><i class="fa fa-plus"></i> item name</a></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4">
-                <div class="single-gallery">
-                     <img src="<?php echo get_template_directory_uri();?>/assets/img/projects/03.jpg" alt="">
-                     <div class="gallery-hover">
-                        <div class="gallery-content">
-                           <h3><a href="<?php echo get_template_directory_uri();?>/assets/img/projects/04.jpg" class="gallery"><i class="fa fa-plus"></i> item name</a></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4">
-                <div class="single-gallery">
-                     <img src="<?php echo get_template_directory_uri();?>/assets/img/projects/05.jpg" alt="">
-                     <div class="gallery-hover">
-                        <div class="gallery-content">
-                           <h3><a href="<?php echo get_template_directory_uri();?>/assets/img/projects/05.jpg" class="gallery"><i class="fa fa-plus"></i> item name</a></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4">
-                <div class="single-gallery">
-                     <img src="<?php echo get_template_directory_uri();?>/assets/img/projects/06.jpg" alt="">
-                     <div class="gallery-hover">
-                        <div class="gallery-content">
-                           <h3><a href="<?php echo get_template_directory_uri();?>/assets/img/projects/06.jpg" class="gallery"><i class="fa fa-plus"></i> item name</a></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4">
-                <div class="single-gallery">
-                     <img src="<?php echo get_template_directory_uri();?>/assets/img/projects/01.jpg" alt="">
-                     <div class="gallery-hover">
-                        <div class="gallery-content">
-                           <h3><a href="<?php echo get_template_directory_uri();?>/assets/img/projects/01.jpg" class="gallery"><i class="fa fa-plus"></i> item name</a></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4">
-                <div class="single-gallery">
-                     <img src="<?php echo get_template_directory_uri();?>/assets/img/projects/01.jpg" alt="">
-                     <div class="gallery-hover">
-                        <div class="gallery-content">
-                           <h3><a href="<?php echo get_template_directory_uri();?>/assets/img/projects/01.jpg" class="gallery"><i class="fa fa-plus"></i> item name</a></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4">
-                <div class="single-gallery">
-                     <img src="<?php echo get_template_directory_uri();?>/assets/img/projects/01.jpg" alt="">
-                     <div class="gallery-hover">
-                        <div class="gallery-content">
-                           <h3><a href="<?php echo get_template_directory_uri();?>/assets/img/projects/01.jpg" class="gallery"><i class="fa fa-plus"></i> item name</a></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <?php
+                }
+                wp_reset_postdata();
+            ?>
         </div>
     </div>
 </section>

@@ -3,7 +3,7 @@
 function halim_setup() {
 
     add_theme_support('title-tag');
-    add_theme_support('post-thumbnails', array('post', 'sliders', 'teams', 'testimonials'));
+    add_theme_support('post-thumbnails', array('post', 'sliders', 'teams', 'testimonials', 'portfolio', 'gallery'));
     load_theme_textdomain('halim', get_template_directory() . '/languages');
 
     register_nav_menus(array(
@@ -96,6 +96,37 @@ function halim_custom_posts() {
         'public' => true,
         'show_ui' => true,
         'supports' => array('title', 'thumbnail', 'custom-fields'),
+    ));
+
+    // Portfolio Custom Post
+    register_post_type('portfolio', array(
+        'labels' => array(
+            'name' => __('Portfolios', 'halim'),
+            'singular_name' => __('Portfolio', 'halim')
+        ),
+        'public' => true,
+        'show_ui' => true,
+        'supports' => array('title', 'editor', 'thumbnail', 'custom-fields'),
+    ));
+
+    // Gallery Custom Post
+    register_post_type('gallery', array(
+        'labels' => array(
+            'name' => __('Gallerys', 'halim'),
+            'singular_name' => __('Gallery', 'halim')
+        ),
+        'public' => true,
+        'show_ui' => true,
+        'supports' => array('title', 'thumbnail', 'custom-fields'),
+    ));
+
+    register_taxonomy('portfolio-cat', 'portfolio', array(
+        'lables' => array(
+            'name' => __('Categories', 'halim'),
+            'singular_name' => __('Category', 'halim')
+        ),
+        'hierarchical' => true,
+        'show_admin_column' => true
     ));
 
 }
