@@ -13,8 +13,13 @@
 					<div class="col-md-6 col-sm-12">
 						<div class="header-left">
                      <?php
-                        $email = get_field('email', 'option');
-                        $phone = get_field('phone', 'option');
+                        if(class_exists('ACF')) {
+                           $email = get_field('email', 'option');
+                           $phone = get_field('phone', 'option');
+                       }
+                       ?>
+                     <?php
+                        
                         if($email) {
                      ?>
                         <a href="mailto:<?php echo $email;?>"><i class="fa fa-envelope"></i> <?php echo $email;?></a>
@@ -31,7 +36,9 @@
 					<div class="col-md-6 col-sm-12 text-right">
 						<div class="header-social">
                      <?php
-                        $socials = get_field('header_social', 'option');
+                        if(class_exists('ACF')) {
+                           $socials = get_field('header_social', 'option');
+                        }
                         foreach($socials as $social) {
                      ?>
                         <a href="<?php echo $social['link'];?>"><i class="fa <?php echo $social['icon'];?>"></i></a>

@@ -24,12 +24,19 @@ get_header();?>
                      <div class="col-xl-12">
                         <div class="slide-table">
                            <div class="slide-tablecell">
-                              <h4><?php the_field('slider_subtitle');?></h4>
+                              <?php
+                                 if(class_exists('ACF')) {
+                                    $sub_title = get_field('slider_subtitle');
+                                    $btn_url = get_field('slider_btn_url');
+                                    $btn_text = get_field('slider_btn_text');
+                                 }
+                              ?>
+                              <h4><?php echo $sub_title;?></h4>
                               <h2><?php the_title();?></h2>
                               <?php the_content();?>
 
-                              <?php if( get_field('slider_btn_text') ){ ?>
-                                 <a href="<?php the_field('slider_btn_url');?>" class="box-btn"><?php the_field('slider_btn_text');?> <i class="fa fa-angle-double-right"></i></a>
+                              <?php if( $btn_text ){ ?>
+                                 <a href="<?php echo esc_url($btn_url);?>" class="box-btn"><?php echo $btn_text;?> <i class="fa fa-angle-double-right"></i></a>
                               <?php } ?>
                               
                            </div>
@@ -51,8 +58,9 @@ get_header();?>
             <div class="row section-title">
                <div class="col-md-6 text-right">
                   <?php
-                     $about_title = get_field('about_section_title', 'option');
-
+                     if(class_exists('ACF')) {
+                        $about_title = get_field('about_section_title', 'option');
+                     }
                   ?>
                   <h3><span><?php echo $about_title['sub_heading'];?></span> <?php echo $about_title['heading'];?></h3>
                </div>
@@ -64,19 +72,23 @@ get_header();?>
                <div class="col-md-7">
                   <div class="about">
                      <?php
-                        $about_content = get_field('about_content', 'option');
+                        if(class_exists('ACF')) {
+                           $about_content = get_field('about_content', 'option');
+                        }
                      ?>
                      <div class="page-title">
                         <h4><?php echo $about_content['title'];?></h4>
                      </div>
                      <p><?php echo $about_content['description'];?></p>
-                     <a href="<?php echo $about_content['btn_url'];?>" class="box-btn"><?php echo $about_content['btn_text'];?> <i class="fa fa-angle-double-right"></i></a>
+                     <a href="<?php echo esc_url($about_content['btn_url']);?>" class="box-btn"><?php echo $about_content['btn_text'];?> <i class="fa fa-angle-double-right"></i></a>
                   </div>
                </div>
                <div class="col-md-5">
 
                <?php
-                  $features = get_field('about_features', 'option');
+                  if(class_exists('ACF')) {
+                     $features = get_field('about_features', 'option');
+                  }
                   foreach($features as $feature) {
                ?>
                   <div class="single_about">
@@ -99,11 +111,19 @@ get_header();?>
                <div class="col-md-6">
                   <div class="faq">
                      <div class="page-title">
-                        <h4><?php the_field('faq_title', 'option');?></h4>
+                        <h4>
+                        <?php
+                           if(class_exists('ACF')) {
+                              the_field('faq_title', 'option');
+                           }
+                        ?>
+                        </h4>
                      </div>
                      <div class="accordion" id="accordionExample">
                         <?php
-                           $faqs = get_field('faqs', 'option');
+                           if(class_exists('ACF')) {
+                              $faqs = get_field('faqs', 'option');
+                           }
                            $i = 0;
                            foreach($faqs as $faq) {
                               $i++;
@@ -131,11 +151,17 @@ get_header();?>
                <div class="col-md-6">
                   <div class="skills">
                      <div class="page-title">
-                        <h4><?php the_field('skill_title', 'option');?></h4>
+                        <h4><?php 
+                           if(class_exists('ACF')) {
+                              the_field('skill_title', 'option');
+                           }
+                        ?></h4>
                      </div>
 
                      <?php
-                        $skills = get_field('skills', 'option');
+                        if(class_exists('ACF')) {
+                           $skills = get_field('skills', 'option');
+                        }
                         foreach($skills as $skill) {
                      ?>
                         <div class="single-skill">
@@ -176,7 +202,9 @@ get_header();?>
                <div class="col-lg-4 col-md-6">
                   <!-- Single Service -->
                   <div class="single-service">
-                     <i class="<?php the_field('service_icon');?>"></i>
+                     <i class="<?php if(class_exists('ACF')) {
+                        the_field('service_icon');
+                     } ?>"></i>
                      <h4><?php the_title();?></h4>
                      <?php the_content();?>
                   </div>
@@ -206,7 +234,11 @@ get_header();?>
             ?>
                <div class="col-md-3">
                   <div class="single-counter">
-                     <h4><i class="<?php the_field('counter_icon'); ?>"></i><span class="counter"><?php the_field('counter_number'); ?></span><?php the_title();?></span></h4>
+                     <h4><i class="?php if(class_exists('ACF')) {
+                        the_field('counter_icon');
+                     } ?>"></i><span class="counter"><?php if(class_exists('ACF')) {
+                        the_field('counter_number');
+                     } ?></span><?php the_title();?></span></h4>
                   </div>
                </div>
             <?php
@@ -244,38 +276,52 @@ get_header();?>
                      <?php the_post_thumbnail();?>
                      <div class="team-hover">
                         <div class="team-content">
-                           <h4><?php the_title();?> <span><?php the_field('team_designation');?></span></h4>
+                           <h4><?php the_title();?> <span><?php if(class_exists('ACF')) {
+                              the_field('team_designation');
+                           } ?></span></h4>
                            <ul>
                               <?php
-                                 if(get_field('team_facebook')) {
+                                 if(class_exists('ACF')) {
+                                    if(get_field('team_facebook')){
                               ?>
+
                                  <li><a href="<?php the_field('team_facebook');?>"><i class="fa fa-facebook"></i></a></li>
                               <?php
                                  }
+                              }
                               ?>
 
                               <?php
-                                 if(get_field('team_twitter')) {
+                                 if(class_exists('ACF')) {
+                                    if(get_field('team_twitter')){
                               ?>
+
                                  <li><a href="<?php the_field('team_twitter');?>"><i class="fa fa-twitter"></i></a></li>
                               <?php
                                  }
+                              }
                               ?>
 
                               <?php
-                                 if(get_field('team_linkedin')) {
+                                 if(class_exists('ACF')) {
+                                    if(get_field('team_linkedin')){
                               ?>
+
                                  <li><a href="<?php the_field('team_linkedin');?>"><i class="fa fa-linkedin"></i></a></li>
                               <?php
                                  }
+                              }
                               ?>
 
-                              <?php
-                                 if(get_field('team_google_plus')) {
+                           <?php
+                                 if(class_exists('ACF')) {
+                                    if(get_field('team_google_plus')){
                               ?>
+
                                  <li><a href="<?php the_field('team_google_plus');?>"><i class="fa fa-google-plus"></i></a></li>
                               <?php
                                  }
+                              }
                               ?>
                            </ul>
                         </div>
@@ -320,8 +366,16 @@ get_header();?>
                         <div class="testi-img">
                            <?php the_post_thumbnail();?>
                         </div>
-                        <p>" <?php the_field('testimonial_description');?> "</p>
-                        <h4><?php the_title();?> <span><?php the_field('testimonial_designation');?></span></h4>
+                        <p>" <?php 
+                           if(class_exists('ACF')) {
+                              the_field('testimonial_description');
+                           }
+                        ?> "</p>
+                        <h4><?php the_title();?> <span><?php 
+                           if(class_exists('ACF')) {
+                              the_field('testimonial_designation');
+                           }
+                        ?></span></h4>
                      </div>
                      <?php } wp_reset_postdata(); ?>
                   </div>

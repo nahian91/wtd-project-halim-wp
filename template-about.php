@@ -20,17 +20,20 @@ get_header();?>
                   </div>
                </div>
                <div class="col-md-5">
-                  <?php 
-                     $about_features = get_field('about_features');
-                     foreach($about_features as $feature) {
-                  ?>
-                     <div class="single_about">
-                        <i class="fa <?php echo $feature['icon'];?>"></i>
-                        <h4><?php echo $feature['title'];?></h4>
-                        <p><?php echo $feature['description'];?></p>
-                     </div>
+
                   <?php
-                   }
+                     if(class_exists('ACF')) {
+                           $about_features = get_field('about_features');
+                           foreach($about_features as $feature) {
+                        ?>
+                           <div class="single_about">
+                              <i class="fa <?php echo esc_attr($feature['icon']);?>"></i>
+                              <h4><?php echo $feature['title'];?></h4>
+                              <p><?php echo $feature['description'];?></p>
+                           </div>
+                        <?php
+                        }
+                     }
                   ?>
                </div>
             </div>

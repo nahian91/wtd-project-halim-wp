@@ -1,10 +1,17 @@
-     
+   
+<?php
+
+   if(class_exists('ACF')) {
+      $cta_title = get_field('cta_title', 'option');
+   }
+
+?>
  <!-- CTA Area Start -->
  <section class="cta">
    <div class="container">
       <div class="row">
          <div class="col-md-6">
-            <h4><?php the_field('cta_title', 'option');?> <span><?php the_field('cta_desscription', 'option');?></span></h4>
+            <h4><?php echo $cta_title;?> <span><?php the_field('cta_desscription', 'option');?></span></h4>
          </div>
          <div class="col-md-6 text-center">
             <a href="<?php the_field('cta_btn_url', 'option');?>" class="box-btn"><?php the_field('cta_btn_text', 'option');?> <i class="fa fa-angle-double-right"></i></a>
@@ -18,34 +25,22 @@
    <div class="container">
       <div class="row">
          <div class="col-lg-3 col-md-6">
-            <div class="single-footer footer-logo">
-               <h3>halim</h3>
-               <p>Lorem ipsum dolor adipisicing amet, consectetur sit elit. Aspernatur incidihil quo officia.</p>
-            </div>
+         <?php if(is_active_sidebar('footer-1')) {
+                  dynamic_sidebar('footer-1');
+               }
+            ?>
          </div>
          <div class="col-lg-2 col-md-6">
-            <div class="single-footer">
-               <h4>quick links</h4>
-               <ul>
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Our Services</a></li>
-                  <li><a href="#">Gallery</a></li>
-                  <li><a href="#">Contact Us</a></li>
-               </ul>
-            </div>
+         <?php if(is_active_sidebar('footer-2')) {
+                  dynamic_sidebar('footer-2');
+               }
+            ?>
          </div>
          <div class="col-lg-4 col-md-6">
-            <div class="single-footer">
-               <h4>latest post</h4>
-               <ul>
-                  <li><a href="#">lorem ipsum dummy text</a></li>
-                  <li><a href="#">lorem ipsum dummy text</a></li>
-                  <li><a href="#">lorem ipsum dummy text</a></li>
-                  <li><a href="#">lorem ipsum dummy text</a></li>
-                  <li><a href="#">lorem ipsum dummy text</a></li>
-               </ul>
-            </div>
+         <?php if(is_active_sidebar('footer-3')) {
+                  dynamic_sidebar('footer-3');
+               }
+            ?>
          </div>
          <div class="col-lg-3 col-md-6">
             <div class="single-footer contact-box">
