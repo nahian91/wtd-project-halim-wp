@@ -24,21 +24,24 @@ get_header();?>
                      <div class="col-xl-12">
                         <div class="slide-table">
                            <div class="slide-tablecell">
-                              <?php
-                                 if(class_exists('ACF')) {
-                                    $sub_title = get_field('slider_subtitle');
-                                    $btn_url = get_field('slider_btn_url');
-                                    $btn_text = get_field('slider_btn_text');
-                                 }
-                              ?>
-                              <h4><?php echo $sub_title;?></h4>
+                              <h4><?php if(class_exists('ACF')){ the_field('slider_subtitle');}?></h4>
                               <h2><?php the_title();?></h2>
                               <?php the_content();?>
 
-                              <?php if( $btn_text ){ ?>
-                                 <a href="<?php echo esc_url($btn_url);?>" class="box-btn"><?php echo $btn_text;?> <i class="fa fa-angle-double-right"></i></a>
-                              <?php } ?>
-                              
+                                 <?php
+                                    if(class_exists('ACF')) {
+                                       $slider_btn_url = get_field('slider_btn_url');
+                                       $slider_btn_text = get_field('slider_btn_text');
+                                    }
+                                 ?>
+
+                                 <?php
+                                    if($slider_btn_text) {
+                                 ?>
+                                       <a href="<?php echo esc_url($slider_btn_url);?>" class="box-btn"><?php $slider_btn_text;?> <i class="fa fa-angle-double-right"></i></a>
+                                 <?php
+                                    }
+                                 ?>
                            </div>
                         </div>
                      </div>
@@ -53,20 +56,24 @@ get_header();?>
       </section>
       <!-- Slider Area Start -->
       <!-- About Area Start -->
+      <?php 
+         if(class_exists('ACF')) {
+      ?>
       <section class="about-area pt-100 pb-100" id="about">
          <div class="container">
             <div class="row section-title">
-               <div class="col-md-6 text-right">
-                  <?php
-                     if(class_exists('ACF')) {
-                        $about_title = get_field('about_section_title', 'option');
-                     }
-                  ?>
-                  <h3><span><?php echo $about_title['sub_heading'];?></span> <?php echo $about_title['heading'];?></h3>
-               </div>
-               <div class="col-md-6">
-                  <p><?php echo $about_title['description'];?> </p>
-               </div>
+               
+                  <div class="col-md-6 text-right">
+                     <?php
+                        if(class_exists('ACF')) {
+                           $about_title = get_field('about_section_title', 'option');
+                        }                        
+                     ?>
+                     <h3><span><?php if(!empty($about_title['sub_heading'])) {echo $about_title['sub_heading'];} ?></span> <?php if(!empty($about_title['heading'])) {echo $about_title['heading'];} ?></h3>
+                  </div>
+                  <div class="col-md-6">
+                     <p><?php if(!empty($about_title['description'])) {echo $about_title['description'];} ?> </p>
+                  </div>
             </div>
             <div class="row">
                <div class="col-md-7">
@@ -87,23 +94,31 @@ get_header();?>
 
                <?php
                   if(class_exists('ACF')) {
-                     $features = get_field('about_features', 'option');
-                  }
-                  foreach($features as $feature) {
-               ?>
-                  <div class="single_about">
-                     <i class="fa <?php echo $feature['aicon'];?>"></i>
-                     <h4><?php echo $feature['title'];?></h4>
-                     <p><?php echo $feature['description'];?></p>
-                  </div>
-               <?php
-                  }
-               ?>
+                     if($features = get_field('about_features', 'option')) {
+                        foreach($features as $feature) {
+                           ?>
+                              <div class="single_about">
+                                 <i class="fa <?php echo $feature['aicon'];?>"></i>
+                                 <h4><?php echo $feature['title'];?></h4>
+                                 <p><?php echo $feature['description'];?></p>
+                              </div>
+                           <?php
+                              }
+                        }
+                     }
+                  ?>
                </div>
             </div>
          </div>
       </section>
+      <?php
+         }
+      ?>
       <!-- About Area End -->
+
+      <?php 
+         if(class_exists('ACF')) {
+      ?>
       <!-- Choose Area End -->
       <section class="choose">
          <div class="container">
@@ -122,27 +137,28 @@ get_header();?>
                      <div class="accordion" id="accordionExample">
                         <?php
                            if(class_exists('ACF')) {
-                              $faqs = get_field('faqs', 'option');
-                           }
-                           $i = 0;
-                           foreach($faqs as $faq) {
-                              $i++;
-                        ?>
-                           <div class="card">
-                              <div class="card-header" id="heading<?php echo $i;?>">
-                                 <h5 class="mb-0">
-                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?php echo $i;?>" aria-expanded="true" aria-controls="collapse<?php echo $i;?>">
-                                    <?php echo $faq['title'];?>
-                                    </button>
-                                 </h5>
-                              </div>
-                              <div id="collapse<?php echo $i;?>" class="collapse <?php if($i == 1){echo 'show';}?>" aria-labelledby="heading<?php echo $i;?>" data-parent="#accordionExample">
-                                 <div class="card-body">
-                                    <?php echo $faq['description'];?>
+                              if($faqs = get_field('faqs', 'option')) {
+                                 $i = 0;
+                                 foreach($faqs as $faq) {
+                                    $i++;
+                              ?>
+                                 <div class="card">
+                                    <div class="card-header" id="heading<?php echo $i;?>">
+                                       <h5 class="mb-0">
+                                          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?php echo $i;?>" aria-expanded="true" aria-controls="collapse<?php echo $i;?>">
+                                          <?php echo $faq['title'];?>
+                                          </button>
+                                       </h5>
+                                    </div>
+                                    <div id="collapse<?php echo $i;?>" class="collapse <?php if($i == 1){echo 'show';}?>" aria-labelledby="heading<?php echo $i;?>" data-parent="#accordionExample">
+                                       <div class="card-body">
+                                          <?php echo $faq['description'];?>
+                                       </div>
+                                    </div>
                                  </div>
-                              </div>
-                           </div>
-                        <?php
+                              <?php
+                                 }
+                              }
                            }
                         ?>
                      </div>
@@ -160,23 +176,28 @@ get_header();?>
 
                      <?php
                         if(class_exists('ACF')) {
-                           $skills = get_field('skills', 'option');
+                           if($skills = get_field('skills', 'option')) {
+                              foreach($skills as $skill) {
+                                 ?>
+                                    <div class="single-skill">
+                                       <h4><?php echo $skill['title'];?></h4>
+                                       <div class="progress-bar" role="progressbar" style="width: <?php echo $skill['number'];?>%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><?php echo $skill['number'];?>%</div>
+                                    </div>
+                                 <?php
+                                    }
+                           }
                         }
-                        foreach($skills as $skill) {
-                     ?>
-                        <div class="single-skill">
-                           <h4><?php echo $skill['title'];?></h4>
-                           <div class="progress-bar" role="progressbar" style="width: <?php echo $skill['number'];?>%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><?php echo $skill['number'];?>%</div>
-                        </div>
-                     <?php
-                        }
-                     ?>
+                        ?>
                   </div>
                </div>
             </div>
          </div>
       </section>
       <!-- Choose Area End -->
+      <?php
+         }
+      ?>
+
       <!-- Services Area Start -->
       <section class="services-area pt-100 pb-50" id="services">
          <div class="container">
@@ -234,11 +255,11 @@ get_header();?>
             ?>
                <div class="col-md-3">
                   <div class="single-counter">
-                     <h4><i class="?php if(class_exists('ACF')) {
+                     <h4><i class="<?php if(class_exists('ACF')) {
                         the_field('counter_icon');
                      } ?>"></i><span class="counter"><?php if(class_exists('ACF')) {
                         the_field('counter_number');
-                     } ?></span><?php the_title();?></span></h4>
+                     } ?></span><?php the_title();?></h4>
                   </div>
                </div>
             <?php

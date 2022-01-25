@@ -6,7 +6,7 @@
                 <div class="breadcumb">
                     <h4><?php echo single_post_title();?></h4>
                     <ul>
-                        <li><a href="<?php echo site_url();?>"></a>Home</li> / 
+                        <li><a href="<?php echo site_url();?>"></a><?php echo esc_html__('Home', 'halim');?></li> / 
                         <li><?php echo single_post_title();?></li>
                     </ul>
                 </div>
@@ -47,7 +47,7 @@
             </div>
             <div class="row">
                <div class="col-md-12 text-center mt-5">
-                  <a href="blog-single.html" class="box-btn">load more <i class="fa fa-angle-double-right"></i></a>
+                  <a href="blog-single.html" class="box-btn"><?php echo esc_html__('load more', 'halim');?> <i class="fa fa-angle-double-right"></i></a>
                </div>
             </div>
          </div>

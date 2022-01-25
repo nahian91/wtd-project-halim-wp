@@ -33,14 +33,14 @@
                 <br><br>
                 <div class="row">
                    <div class="col-xl-12">
-                        <h4>project overview</h4>
+                        <h4><?php echo esc_html__('project overview', 'halim');?></h4>
                         <?php the_field('project_video');?>
                    </div>
                 </div>
             </div>
             <div class="col-xl-4">
                 <div class="portfolio-sidebar">
-                    <h4>Technology Used</h4>
+                    <h4><?php echo esc_html__('Technology Used', 'halim');?></h4>
                     <ul>
                        <?php
                            if($techs = get_field('project_tech')) {

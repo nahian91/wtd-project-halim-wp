@@ -6,7 +6,7 @@
                 <div class="breadcumb">
                     <h4>404</h4>
                     <ul>
-                        <li><a href="<?php echo site_url();?>"></a>Home</li> / 
+                        <li><a href="<?php echo site_url();?>"></a><?php echo esc_html__('Home', 'halim');?></li> / 
                         <li>404</li>
                     </ul>
                 </div>
@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="page">
-                    <h4>404 Page Not Found</h4>
+                    <h4><?php echo esc_html__('404 Page Not Found', 'halim');?>/<h4>
                 </div>
             </div>
             <div class="col-md-4">

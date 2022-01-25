@@ -13,7 +13,7 @@ get_header();?>
             <div class="row">
                <div class="col-xl-12">
                   <div class="portfolio-menu mb-40 text-center">
-                     <button class="active" data-filter="*">ALL</button>
+                     <button class="active" data-filter="*"><?php echo esc_html__('All', 'halim');?></button>
 
                      <?php
                         $cats = get_terms('portfolio-cat');
@@ -48,7 +48,7 @@ get_header();?>
                            <img src="<?php echo the_post_thumbnail_url();?>" alt="">
                            <div class="portfolio-hover">
                               <div class="portfolio-content">
-                                 <h3><a href="<?php the_permalink();?>" class=""><i class="fa fa-link"></i> <?php the_title();?> <span><?php the_field('designation');?></span></a></h3>
+                                 <h3><a href="<?php the_permalink();?>" class=""><i class="fa fa-link"></i> <?php the_title();?> <span><?php if(class_exists('ACF')){the_field('designation');}?></span></a></h3>
                               </div>
                            </div>
                         </div>

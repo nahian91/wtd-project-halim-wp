@@ -15,24 +15,26 @@ get_header();?>
                   <div class="row text-center">
                      <?php
                         if(class_exists('ACF')) {
-                           $contacts = get_field('contact_list', 'option');
-                           foreach($contacts as $contact) {
-                        ?>
-                           <div class="col-md-4">
-                              <div class="contact-address">
-                                 <i class="fa <?php echo esc_attr($contact['contact_icon']);?>"></i>
-                                 <h4><?php echo $contact['contact_title'];?> <span><?php echo $contact['contact_desc'];?></span></h4>
-                              </div>
-                           </div>
-                        <?php
+                           if($contacts = get_field('contact_list', 'option')) {
+                              foreach($contacts as $contact) {
+                                 ?>
+                                    <div class="col-md-4">
+                                       <div class="contact-address">
+                                          <i class="fa <?php echo esc_attr($contact['contact_icon']);?>"></i>
+                                          <h4><?php echo $contact['contact_title'];?> <span><?php echo $contact['contact_desc'];?></span></h4>
+                                       </div>
+                                    </div>
+                                 <?php
+                                    }
+                                 }
                            }
-                        }
+                           
                      ?>
                   </div>
                   <div class="row">
                      <div class="col-md-7">
                         <div class="contact-form">
-                           <?php echo do_shortcode('[contact-form-7 id="232" title="Contact Form"]');?>
+                           <?php echo do_shortcode('[contact-form-7 id="235" title="Contact Form"]');?>
                         </div>
                      </div>
                      <div class="col-md-5">

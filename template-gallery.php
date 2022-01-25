@@ -28,9 +28,11 @@ get_header();?>
                                 <?php
                                     if(class_exists('ACF')) {
                                         $big_image = get_field('big_image');
+                                ?>
+                                    <h3><a href="<?php echo $big_image; ?>" class="gallery"><i class="fa fa-plus"></i> <?php the_title();?></a></h3>
+                                <?php
                                     }
                                 ?>
-                                <h3><a href="<?php echo $big_image; ?>" class="gallery"><i class="fa fa-plus"></i> <?php the_title();?></a></h3>
                                 </div>
                             </div>
                         </div>

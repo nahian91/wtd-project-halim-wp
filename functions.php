@@ -1,5 +1,10 @@
 <?php
 
+require_once get_template_directory(). '/inc/class-tgm-plugin-activation.php';
+require_once get_template_directory(). '/inc/halim-activation.php';
+require_once get_template_directory(). '/inc/halim-demo-import.php';
+require_once get_template_directory(). '/inc/halim-acf-data.php';
+
 function halim_setup() {
 
     add_theme_support('title-tag');
@@ -37,101 +42,6 @@ function halim_assets() {
 }   
 add_action('wp_enqueue_scripts', 'halim_assets');
 
-
-// Custom Posts
-function halim_custom_posts() {
-
-    // Slider Custom Post
-    register_post_type('sliders', array(
-        'labels' => array(
-            'name' => __('Sliders', 'halim'),
-            'singular_name' => __('Slider', 'halim')
-        ),
-        'public' => true,
-        'show_ui' => true,
-        'supports' => array('title', 'editor', 'thumbnail', 'custom-fields'),
-        'show_in_rest' => true
-    ));
-
-    // Services Custom Post
-    register_post_type('services', array(
-        'labels' => array(
-            'name' => __('Services', 'halim'),
-            'singular_name' => __('Service', 'halim')
-        ),
-        'public' => true,
-        'show_ui' => true,
-        'supports' => array('title', 'editor', 'custom-fields'),
-        'show_in_rest' => true
-    ));
-
-    // Counter Custom Post
-    register_post_type('counters', array(
-        'labels' => array(
-            'name' => __('Counters', 'halim'),
-            'singular_name' => __('Counter', 'halim')
-        ),
-        'public' => true,
-        'show_ui' => true,
-        'supports' => array('title', 'custom-fields'),
-    ));
-
-    // Team Custom Post
-    register_post_type('teams', array(
-        'labels' => array(
-            'name' => __('Teams', 'halim'),
-            'singular_name' => __('Team', 'halim')
-        ),
-        'public' => true,
-        'show_ui' => true,
-        'supports' => array('title', 'thumbnail', 'custom-fields'),
-    ));
-
-    // Testimonials Custom Post
-    register_post_type('testimonials', array(
-        'labels' => array(
-            'name' => __('Testimonials', 'halim'),
-            'singular_name' => __('Testimonial', 'halim')
-        ),
-        'public' => true,
-        'show_ui' => true,
-        'supports' => array('title', 'thumbnail', 'custom-fields'),
-    ));
-
-    // Portfolio Custom Post
-    register_post_type('portfolio', array(
-        'labels' => array(
-            'name' => __('Portfolios', 'halim'),
-            'singular_name' => __('Portfolio', 'halim')
-        ),
-        'public' => true,
-        'show_ui' => true,
-        'supports' => array('title', 'editor', 'thumbnail', 'custom-fields'),
-    ));
-
-    // Gallery Custom Post
-    register_post_type('gallery', array(
-        'labels' => array(
-            'name' => __('Gallerys', 'halim'),
-            'singular_name' => __('Gallery', 'halim')
-        ),
-        'public' => true,
-        'show_ui' => true,
-        'supports' => array('title', 'thumbnail', 'custom-fields'),
-    ));
-
-    register_taxonomy('portfolio-cat', 'portfolio', array(
-        'lables' => array(
-            'name' => __('Categories', 'halim'),
-            'singular_name' => __('Category', 'halim')
-        ),
-        'hierarchical' => true,
-        'show_admin_column' => true
-    ));
-
-}
-add_action('init', 'halim_custom_posts');
-
 // Register Sidebar
 
 function halim_widgets_init() {
@@ -159,7 +69,7 @@ function halim_widgets_init() {
         'name'          => __( 'Footer 2', 'halim' ),
         'id'            => 'footer-2',
         'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'halim' ),
-        'before_widget' => '<div class="single-footer footer-logo">',
+        'before_widget' => '<div class="single-footer">',
         'after_widget'  => '</div>',
         'before_title'  => '<h4 class="widget-title">',
         'after_title'   => '</h4>',
@@ -169,7 +79,7 @@ function halim_widgets_init() {
         'name'          => __( 'Footer 3', 'halim' ),
         'id'            => 'footer-3',
         'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'halim' ),
-        'before_widget' => '<div class="single-footer footer-logo">',
+        'before_widget' => '<div class="single-footer">',
         'after_widget'  => '</div>',
         'before_title'  => '<h4 class="widget-title">',
         'after_title'   => '</h4>',
@@ -296,3 +206,11 @@ function placeholder_comment_form_field($fields) {
     return $fields;
  }
 add_filter( 'comment_form_defaults', 'placeholder_comment_form_field', 20 );
+
+add_filter('acf/settings/save_json', 'halim_acf_json_save_point');
+function halim_acf_json_save_point( $path ) {
+      // update path
+      $path = plugin_dir_path( __FILE__ ) . '/acf-json';
+      // return
+      return $path;
+    }
